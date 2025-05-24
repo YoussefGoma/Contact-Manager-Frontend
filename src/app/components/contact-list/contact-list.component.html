@@ -1,0 +1,159 @@
+<div class="contact-list-container">
+  <!-- Header -->
+  <mat-toolbar color="primary" class="header-toolbar">
+    <span>Contact Manager</span>
+    <span class="spacer"></span>
+    <span class="user-info">Welcome, {{currentUser}}</span>
+    <button mat-icon-button (click)="logout()" matTooltip="Logout">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <!-- Main Content -->
+  <div class="content-container">
+    <!-- Filters and Add Button -->
+    <mat-card class="filters-card">
+      <mat-card-header>
+        <mat-card-title>Contacts</mat-card-title>
+        <div class="header-actions">
+          <button mat-raised-button color="primary" (click)="openAddDialog()">
+            <mat-icon>add</mat-icon>
+            Add Contact
+          </button>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="filters-container">
+          <mat-form-field appearance="outline" class="filter-field">
+            <mat-label>Filter by Name</mat-label>
+            <input matInput [formControl]="nameFilter" placeholder="Search names...">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="filter-field">
+            <mat-label>Filter by Phone</mat-label>
+            <input matInput [formControl]="phoneFilter" placeholder="Search phones...">
+            <mat-icon matSuffix>phone</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="filter-field">
+            <mat-label>Filter by Address</mat-label>
+            <input matInput [formControl]="addressFilter" placeholder="Search addresses...">
+            <mat-icon matSuffix>location_on</mat-icon>
+          </mat-form-field>
+
+          <button mat-stroked-button (click)="clearFilters()" class="clear-filters-btn">
+            <mat-icon>clear</mat-icon>
+            Clear Filters
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Contacts Table -->
+    <mat-card class="table-card">
+      <mat-card-content>
+        <div class="table-container">
+          <table mat-table [dataSource]="dataSource" class="contacts-table">
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let contact">
+                <div class="cell-content">
+                  <span>{{contact.name}}</span>
+                  <mat-chip *ngIf="isContactLocked(contact)" 
+                           [color]="isContactLockedByOther(contact) ? 'warn' : 'accent'"
+                           class="lock-chip">
+                    <mat-icon>{{isContactLockedByOther(contact) ? 'lock' : 'edit'}}</mat-icon>
+                    {{contact.lockedBy}}
+                  </mat-chip>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Phone Column -->
+            <ng-container matColumnDef="phone">
+              <th mat-header-cell *matHeaderCellDef>Phone</th>
+              <td mat-cell *matCellDef="let contact">
+                <div class="phone-cell">
+                  <mat-icon>phone</mat-icon>
+                  <span>{{contact.phone}}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Address Column -->
+            <ng-container matColumnDef="address">
+              <th mat-header-cell *matHeaderCellDef>Address</th>
+              <td mat-cell *matCellDef="let contact">
+                <div class="address-cell">
+                  <mat-icon>location_on</mat-icon>
+                  <span>{{contact.address}}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Notes Column -->
+            <ng-container matColumnDef="notes">
+              <th mat-header-cell *matHeaderCellDef>Notes</th>
+              <td mat-cell *matCellDef="let contact">
+                <span class="notes-text" [matTooltip]="contact.notes || 'No notes'">
+                  {{contact.notes || 'No notes'}}
+                </span>
+              </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let contact">
+                <div class="actions-cell">
+                  <button mat-icon-button 
+                          (click)="editContact(contact)"
+                          [disabled]="isContactLockedByOther(contact)"
+                          [matTooltip]="isContactLockedByOther(contact) ? 'Contact is locked by ' + contact.lockedBy : 'Edit contact'">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  
+                  <button mat-icon-button 
+                          color="warn"
+                          (click)="deleteContact(contact)"
+                          matTooltip="Delete contact">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+                [class.locked-row]="isContactLockedByOther(row)"></tr>
+          </table>
+
+          <!-- Loading Spinner -->
+          <div *ngIf="loading" class="loading-container">
+            <mat-spinner></mat-spinner>
+          </div>
+
+          <!-- No Data Message -->
+          <div *ngIf="!loading && dataSource.data.length === 0" class="no-data">
+            <mat-icon>contacts</mat-icon>
+            <h3>No contacts found</h3>
+            <p>Add your first contact or adjust your filters</p>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <mat-paginator 
+          [length]="totalContacts"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="[5]"
+          [pageIndex]="currentPage - 1"
+          (page)="onPageChange($event)"
+          showFirstLastButtons>
+        </mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
