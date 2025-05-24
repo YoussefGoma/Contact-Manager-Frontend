@@ -1,0 +1,100 @@
+.confirm-dialog-container {
+  min-width: 300px;
+  max-width: 400px;
+}
+
+h2[mat-dialog-title] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  color: #333;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+h2[mat-dialog-title] mat-icon {
+  font-size: 24px;
+}
+
+mat-dialog-content {
+  padding: 0 24px 20px 24px;
+}
+
+mat-dialog-content p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #555;
+}
+
+mat-dialog-actions {
+  gap: 8px;
+  padding: 0 24px 24px 24px;
+}
+
+mat-dialog-actions button {
+  min-width: 80px;
+  height: 40px;
+}
+
+/* Warning button styling */
+button[color="warn"] {
+  background-color: #f44336;
+  color: white;
+}
+
+button[color="warn"]:hover {
+  background-color: #d32f2f;
+}
+
+button[color="warn"] mat-icon {
+  margin-right: 4px;
+}
+
+/* Cancel button styling */
+button[mat-button] {
+  color: #666;
+}
+
+button[mat-button]:hover {
+  background-color: #f5f5f5;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .confirm-dialog-container {
+    min-width: 280px;
+  }
+  
+  mat-dialog-content,
+  mat-dialog-actions {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  mat-dialog-actions {
+    flex-direction: column;
+  }
+  
+  mat-dialog-actions button {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
+
+/* Animation */
+.confirm-dialog-container {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
