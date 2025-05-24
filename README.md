@@ -1,6 +1,17 @@
-# ContactManagerFrontend
+# Contact Manager Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.13.
+This is the frontend of the Contact Manager application built with React.
+
+## Getting Started
+
+
+### Installation
+
+```bash
+git clone https://github.com/YoussefGoma/Contact-Manager-Frontend.git
+cd Contact-Manager-Frontend
+```
+
 
 ## Development server
 
@@ -11,6 +22,8 @@ ng serve
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.13.
 
 ## Code scaffolding
 
@@ -57,3 +70,6 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Related Repository
+Backend Repository: [Contact Manager Backend](https://github.com/YoussefGoma/Contact-Manager-Backend)
