@@ -1,0 +1,123 @@
+.contact-form-container {
+  min-width: 400px;
+}
+
+h2[mat-dialog-title] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+h2[mat-dialog-title] mat-icon {
+  color: #1976d2;
+  font-size: 24px;
+}
+
+mat-dialog-content {
+  padding: 0 24px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.character-counter {
+  font-size: 12px;
+  color: #666;
+  text-align: right;
+  margin-top: -12px;
+  margin-bottom: 16px;
+}
+
+mat-dialog-actions {
+  padding: 16px 24px;
+  gap: 8px;
+}
+
+mat-dialog-actions button {
+  min-width: 100px;
+  height: 40px;
+}
+
+mat-form-field {
+  font-size: 14px;
+}
+
+mat-form-field mat-icon[matSuffix] {
+  color: #666;
+}
+
+::ng-deep .mat-mdc-form-field.mat-form-field-invalid .mat-mdc-form-field-error {
+  color: #f44336;
+}
+
+::ng-deep .mat-mdc-form-field-hint {
+  font-size: 12px;
+  color: #666;
+}
+
+button[disabled] {
+  opacity: 0.6;
+}
+
+button mat-spinner {
+  margin-right: 8px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+  font-family: inherit;
+}
+
+::ng-deep .mat-mdc-form-field.mat-focused .mdc-notched-outline__leading,
+::ng-deep .mat-mdc-form-field.mat-focused .mdc-notched-outline__notch,
+::ng-deep .mat-mdc-form-field.mat-focused .mdc-notched-outline__trailing {
+  border-color: #1976d2;
+}
+
+::ng-deep .mat-mdc-form-field.mat-focused .mat-mdc-floating-label {
+  color: #1976d2;
+}
+
+@media (max-width: 600px) {
+  .contact-form-container {
+    min-width: 300px;
+  }
+  
+  mat-dialog-content {
+    padding: 0 16px;
+  }
+  
+  mat-dialog-actions {
+    padding: 16px;
+    flex-direction: column;
+  }
+  
+  mat-dialog-actions button {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
+
+.mat-mdc-form-field-error {
+  animation: slideIn 0.3s ease-in-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,75 @@
+<div class="contact-form-container">
+  <h2 mat-dialog-title>
+    <mat-icon>{{isEditMode ? 'edit' : 'person_add'}}</mat-icon>
+    {{isEditMode ? 'Edit Contact' : 'Add New Contact'}}
+  </h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Full Name *</mat-label>
+        <input matInput formControlName="name" placeholder="Enter full name">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-error>{{getErrorMessage('name')}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Phone Number *</mat-label>
+        <input matInput formControlName="phone" placeholder="Enter phone number">
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-error>{{getErrorMessage('phone')}}</mat-error>
+        <mat-hint>Format: +1234567890 or (123) 456-7890</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Address *</mat-label>
+        <textarea matInput 
+                  formControlName="address" 
+                  placeholder="Enter complete address"
+                  rows="3"
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="2"
+                  cdkAutosizeMaxRows="4">
+        </textarea>
+        <mat-icon matSuffix>location_on</mat-icon>
+        <mat-error>{{getErrorMessage('address')}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Notes</mat-label>
+        <textarea matInput 
+                  formControlName="notes" 
+                  placeholder="Additional notes (optional)"
+                  rows="3"
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="2"
+                  cdkAutosizeMaxRows="5">
+        </textarea>
+        <mat-icon matSuffix>note</mat-icon>
+        <mat-error>{{getErrorMessage('notes')}}</mat-error>
+        <mat-hint>Maximum 500 characters</mat-hint>
+      </mat-form-field>
+
+      <!-- Character Counter for Notes -->
+      <div class="character-counter" *ngIf="f['notes'].value">
+        {{f['notes'].value.length}}/500 characters
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()" [disabled]="loading">
+      Cancel
+    </button>
+    <button mat-raised-button 
+            color="primary" 
+            (click)="onSubmit()" 
+            [disabled]="loading || contactForm.invalid">
+      <mat-icon *ngIf="loading">
+        <mat-spinner diameter="16"></mat-spinner>
+      </mat-icon>
+      <mat-icon *ngIf="!loading">{{isEditMode ? 'save' : 'add'}}</mat-icon>
+      {{loading ? 'Saving...' : (isEditMode ? 'Update Contact' : 'Add Contact')}}
+    </button>
+  </mat-dialog-actions>
+</div>
