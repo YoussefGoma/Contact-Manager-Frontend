@@ -1,0 +1,13 @@
+::ng-deep .mat-mdc-snack-bar-container {
+  border-radius: 8px;
+}
+
+::ng-deep .success-snackbar .mat-mdc-snack-bar-surface {
+  background-color: #4caf50;
+  color: white;
+}
+
+::ng-deep .error-snackbar .mat-mdc-snack-bar-surface {
+  background-color: #f44336;
+  color: white;
+}
