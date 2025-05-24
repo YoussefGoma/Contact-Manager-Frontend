@@ -1,0 +1,93 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.login-button {
+  height: 48px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.demo-credentials {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.demo-credentials p {
+  margin-bottom: 12px;
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.credential-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.demo-btn {
+  flex: 1;
+  max-width: 120px;
+  height: 40px;
+}
+
+.demo-btn mat-icon {
+  margin-right: 4px;
+}
+
+/* Form field styling */
+::ng-deep .mat-mdc-form-field {
+  margin-bottom: 8px;
+}
+
+::ng-deep .mat-mdc-form-field-error {
+  font-size: 12px;
+}
+
+/* Loading spinner in button */
+.login-button mat-spinner {
+  margin-right: 8px;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 10px;
+  }
+  
+  .login-card {
+    padding: 16px;
+  }
+  
+  .credential-buttons {
+    flex-direction: column;
+  }
+  
+  .demo-btn {
+    max-width: none;
+    width: 100%;
+  }
+}
